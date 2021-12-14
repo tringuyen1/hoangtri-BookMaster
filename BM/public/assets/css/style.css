@@ -1,0 +1,177 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  box-sizing: border-box;
+}
+html,body{
+  height: 100%;
+}
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  display: grid;
+  place-items: center;
+  /* overflow: hidden; */
+  width: 500px;
+  margin-left: 400px;
+  background-image: url(https://img2.thuthuatphanmem.vn/uploads/2018/12/30/background-dep-lam-khung-anh_110341384.jpg);
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  border-radius: 10px;
+}
+.date label {
+  padding-top: 10px;
+}
+h1,
+label {
+  color: DodgerBlue;
+}
+
+.title-id {
+  display: flex;
+}
+
+.title-id a {
+  margin: 15px 0 0px 190px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="password"] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  width: 100%;
+  resize: vertical;
+  padding: 15px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+}
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+.btn-add,.btn-update,.btn-search,.btn-delete,.btn-clear {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+button:hover {
+  opacity: 1;
+}
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+.searchId {
+  display: flex;
+}
+.btn-search {
+  padding: 10px;
+  margin: 5px 0px 22px 20px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-form {
+  display: flex;
+}
+.btn-add {
+  margin: 10px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.btn-update {
+  margin: 10px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.btn-delete {
+  margin: 10px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.btn-clear {
+  margin: 10px;
+  border-radius: 15px;
+  border: 0;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+.date {
+  display: flex;
+}
+
+.date label {
+  margin: 10px;
+}
+.container {
+  padding: 16px;
+}
+
+.error {
+  margin-top: 0px;
+  color: red;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+
+/* ------------------------------------------------------------- */
+/* The alert message box */
+.alert {
+  padding: 10px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+  font-size: 10px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-size: 15px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
