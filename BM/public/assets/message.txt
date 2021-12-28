@@ -1,0 +1,18 @@
+var arrMessage = {
+  MSG001: "Vui lòng nhập id của sách",
+  MSG002: "Hãy nhập Book ID bằng chữ số 1 byte",
+  MSG003: "Sách đã được tìm thấy",
+  MSG004: "Không thể tìm thấy Book ID****",
+  MSG005: "Đã phát sinh ngoại lệ bằng xử lý server",
+  MSG006: "Hãy nhập Book title",
+  MSG007: "Hãy nhập tên tác giả",
+  MSG008: "Hãy nhập nhà xuất bản",
+  MSG009: "Hãy nhập ngày xuất bản",
+  MSG0010: "Hãy nhập ngày xuất bản bằng chữ số 1 byte",
+  MSG0011: "Book ID****đã được đăng ký. Hãy nhập ID khác",
+  MSG0012: "Đã đăng ký sách",
+  MSG0013: "Đã update sách",
+  MSG0014: "Book ID****không được tìm thấy",
+  MSG0015: "Đã xóa Book ID****",
+  MSG0016: "Ngày xuất bản không hợp lệ",
+};

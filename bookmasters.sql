@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 14, 2021 lúc 09:18 AM
+-- Thời gian đã tạo: Th12 28, 2021 lúc 12:24 PM
 -- Phiên bản máy phục vụ: 10.4.19-MariaDB
 -- Phiên bản PHP: 8.0.6
 
@@ -42,10 +42,10 @@ CREATE TABLE `bookmasters` (
 --
 
 INSERT INTO `bookmasters` (`id`, `book_title`, `author_name`, `publisher`, `publication_day`, `insert_day`, `update_day`) VALUES
-('B002', 'Việt Bắc', 'Tố Hữu', 'Việt nam', '2021-12-13', '2021-12-10 17:00:00', '2021-12-12 17:00:00'),
-('B003', 'Sông Hương', 'Xuân Quỳnh', 'sở giáo dục việt nam', '2021-12-13', '2021-12-12 17:00:00', '2021-12-12 17:00:00'),
-('B004', 'Việt Bắc', 'Tố Hữu', 'Việt Nam', '2009-12-13', '2021-12-12 17:00:00', '2021-12-13 17:00:00'),
-('B005', 'Việt Bắc', 'Tố Hữu', 'Việt Nam', '2001-02-13', '2021-12-13 17:00:00', NULL);
+('B001', 'Sông Hương', 'Tố Hữu', 'Việt Nam', '2002-03-04', '2021-12-27 17:00:00', '2021-12-27 17:00:00'),
+('B002', 'Đà Lạt', 'Xuân Quỳnh', 'Việt Nam', '2020-03-04', '2021-12-27 17:00:00', '2021-12-27 17:00:00'),
+('B003', 'Đà Lạt', 'Xuân Quỳnh', 'Việt Nam', '2020-03-04', '2021-12-27 17:00:00', NULL),
+('B004', 'Vợ Nhặt', 'Tố Hữu', 'Việt Nam', '2002-03-04', '2021-12-27 17:00:00', '2021-12-27 17:00:00');
 
 --
 -- Chỉ mục cho các bảng đã đổ

@@ -150,28 +150,25 @@ button:hover {
 
 
 /* ------------------------------------------------------------- */
-/* The alert message box */
-.alert {
-  padding: 10px;
-  background-color: #f44336; /* Red */
-  color: white;
-  margin-bottom: 15px;
-  font-size: 10px;
+
+
+
+/* form validation */
+
+.form-group.invalid .form-message {
+  color: #f33a58;
 }
 
-/* The close button */
-.closebtn {
-  margin-left: 15px;
-  color: white;
-  font-weight: bold;
+.form-message {
+  font-size: 0.9rem;
+  line-height: 1.6rem;
+}
+
+
+.message{
+  font-size: 0.9rem;
+  line-height: 1.6rem;
   text-align: center;
-  font-size: 15px;
-  line-height: 20px;
-  cursor: pointer;
-  transition: 0.3s;
+  color: #00FF7F;
 }
 
-/* When moving the mouse over the close button */
-.closebtn:hover {
-  color: black;
-}
