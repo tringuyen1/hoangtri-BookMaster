@@ -164,11 +164,27 @@ button:hover {
   line-height: 1.6rem;
 }
 
-
-.message{
-  font-size: 0.9rem;
-  line-height: 1.6rem;
-  text-align: center;
-  color: #00FF7F;
+/* The alert message box */
+.alert {
+  padding: 5px;
+  background-color: #00FF7F; /* Red */
+  color: white;
+  margin-bottom: 15px;
 }
 
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}

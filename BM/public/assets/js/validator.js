@@ -164,7 +164,7 @@ Validator.isBookId = function (selector, message) {
   return {
     selector: selector,
     test: function (value) {
-      var regex = /^[A-Za-z]+[a-zA-Z0-9]+[a-zA-Z0-9]+[a-zA-Z0-9]$/;
+      var regex = /^[A-Za-z0-9]+[a-zA-Z0-9]+[a-zA-Z0-9]+[a-zA-Z0-9]$/;
       return regex.test(value) ? undefined : message;
     },
   };

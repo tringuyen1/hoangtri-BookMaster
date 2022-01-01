@@ -6,7 +6,12 @@
                 <h1>本マスタメンテ</h1>
                 <a href="bookmaster/thank">閉じる</a>
             </div>
-            <?php if(isset($mess)) echo "<p class='message'>$mess</p>" ?>
+            <?php if(isset($mess)) { ?>
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    <?php echo $mess?>
+                </div>
+            <?php }?>
             <!--  -->
             <?php 
             echo Form::open(array('action' => '', 'method' => 'post','id'=>'formBookSearch')); 
@@ -96,20 +101,21 @@
                         echo Form::submit('btn-update', '更新', array(
                             'class' => 'btn-update'));  
                         echo Form::submit('btn-delete', '削除', array(
-                            'class' => 'btn-delete')); 
-                        echo Form::submit('btn-clear', 'クリア', array(
-                            'class' => 'btn-clear',));  
+                            'class' => 'btn-delete'));  
                     ?>
+                    <input type="submit" name="btn-clear" class="btn-clear" value="クリア" <?php 
+                            if(isset($bookIdSearch)){
+                                echo "onclick = ''";
+                            }else {
+                                echo "onclick = 'return false;'";
+                            }
+                    ?>/>
                 </div>
             </div>
-
          </div>
-         <script>
-             
-         </script>
         <?php 
             echo Form::close(); 
-         ?>     
+        ?>     
          </div>
     </div>
 
