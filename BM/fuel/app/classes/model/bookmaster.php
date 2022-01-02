@@ -1,7 +1,5 @@
 <?php
 class Model_Bookmaster extends Orm\Model {
-    
-   
     //Thực thi chuổi truy vấn
     public static function db_query($query_string) {
         $conn = mysqli_connect('localhost', 'root', '', 'mt_book');

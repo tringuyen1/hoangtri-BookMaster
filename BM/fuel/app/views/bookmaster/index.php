@@ -7,9 +7,13 @@
                 <a href="bookmaster/thank">閉じる</a>
             </div>
             <?php if(isset($mess)) { ?>
-                <div class="alert">
-                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                    <?php echo $mess?>
+                <div class = "issetAlert"></div>
+                    <div class="alert showAlert">
+                        <span class="fas fa-exclamation-circle"></span>
+                        <span class="msg"><?php echo $mess?></span>
+                        <div class="close-btn">
+                            <span class="fas fa-times"></span>
+                        </div>
                 </div>
             <?php }?>
             <!--  -->
@@ -120,6 +124,19 @@
     </div>
 
     <script>
+        if ($(".issetAlert")[0]){
+            $('.alert').addClass("show");
+            $('.alert').removeClass("hide");
+            $('.alert').addClass("showAlert");
+            setTimeout(function(){
+               $('.alert').removeClass("show");
+               $('.alert').addClass("hide");
+            },3000);
+         }
+         $('.close-btn').click(function(){
+           $('.alert').removeClass("show");
+           $('.alert').addClass("hide");
+         });
         Validator({      
             form: '#formBookSearch',
             formGroupSelector: '.form-group',
