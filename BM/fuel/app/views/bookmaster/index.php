@@ -8,9 +8,19 @@
             </div>
             <?php if(isset($mess)) { ?>
                 <div class = "issetAlert"></div>
-                    <div class="alert showAlert">
-                        <span class="fas fa-exclamation-circle"></span>
-                        <span class="msg"><?php echo $mess?></span>
+                    <div class="alert hide" style="border-left: 8px solid #00FF7F;">
+                        <span class="fas fas fa-check-circle" style="color: #00FF7F;"></span>
+                        <span class="msg">Success: <?php echo $mess?></span>
+                        <div class="close-btn">
+                            <span class="fas fa-times"></span>
+                        </div>
+                </div>
+            <?php }?>
+            <?php if(isset($messError)) { ?>
+                <div class = "issetAlert"></div>
+                    <div class="alert hide" style="border-left: 8px solid #FF0000;">
+                        <span class="fas fa-exclamation-circle" style="color: #FF0000;"></span>
+                        <span class="msg">Error: <?php echo $messError?></span>
                         <div class="close-btn">
                             <span class="fas fa-times"></span>
                         </div>

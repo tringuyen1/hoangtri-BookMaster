@@ -26,7 +26,11 @@ class Controller_Bookmaster extends Controller_Template
         // xử lí thêm -----------------------------------------------BEGIN
         $Add = $this->addBook();
         if(is_array($Add)){
-            $data = array('mess'=> $Add[0]);
+            if(count($Add) == 2){
+                $data = array('mess'=>$Add[0],'bookIdSearch' => $Add[1]);
+            }else {
+                $data = array('messError'=> $Add[0]);
+            }
         }
         // kết thúc xử lý thêm -------------------------------------END
         
@@ -37,7 +41,7 @@ class Controller_Bookmaster extends Controller_Template
             if(count($search) == 2){
                 $data = array('mess'=>$search[0],'bookIdSearch' => $search[1]);
             }else {
-                $data = array('mess' => $search[0]);
+                $data = array('messError' => $search[0]);
             }
            
         }
@@ -50,9 +54,8 @@ class Controller_Bookmaster extends Controller_Template
             if(count($update) == 2){
                 $data = array('mess'=>$update[0],'bookIdSearch' => $update[1]);
             }else {
-                $data = array('mess'=> $update[0]);
+                $data = array('messError'=> $update[0]);
             }
-            
         }
         // kết thúc update --------------------------------------------------end
         
@@ -60,7 +63,12 @@ class Controller_Bookmaster extends Controller_Template
         // Xóa --------------------------------------------------Begin
         $delete = $this->deleteBook();
         if(is_array($delete)){
-            $data = array('mess'=> $delete[0]);
+            if(count($delete) == 2){
+                $data = array('mess'=> $delete[0]);
+            }else {
+                $data = array('messError'=> $delete[0]);
+            }
+            
         }
         // kết thúc Xóa --------------------------------------------------end
 
@@ -97,9 +105,11 @@ class Controller_Bookmaster extends Controller_Template
                     // thêm
                     Model_Bookmaster::db_insert($dataBook);
 
+                    $bookIdSearch = Model_Bookmaster::getDetailbook(input::post('bookId'));
+
                     // trả về mảng thông báo
                     $mess = $this->messAge['MSG0012'];
-                    return array($mess);
+                    return array($mess,$bookIdSearch);
                 }else{
                     // trả về mảng thông báo
                     $mess = $this->messAge['MSG0011'];
@@ -202,7 +212,7 @@ class Controller_Bookmaster extends Controller_Template
                     Model_Bookmaster::db_delete($id);
                     // thông báo
                     $mess = $this->messAge['MSG0015'];
-                    return array($mess);
+                    return array($mess,$id);
                 }
             }
         }catch (Exception $e)

@@ -169,7 +169,7 @@ button:hover {
   right: 0;
   top: 10px;
   border-radius: 4px;
-  border-left: 8px solid #00FF7F;
+  /* border-left: 8px solid #00FF7F; */
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
@@ -219,13 +219,20 @@ button:hover {
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  color: #00FF7F;
+  /* color: #00FF7F; */
+  font-size: 30px;
+}
+.alert .fa-check-circle{
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  /* color: #00FF7F; */
   font-size: 30px;
 }
 .alert .msg{
   padding: 0 20px;
-  font-size: 18px;
-  color: #00FF7F;
+  font-size: 15px;
 }
 
 .alert .close-btn{
@@ -238,11 +245,7 @@ button:hover {
   cursor: pointer;
 }
 
-.alert .close-btn:hover{
-  background: #ffc766;
-}
 .alert .close-btn .fas{
-  color: #ce8500;
   font-size: 22px;
   line-height: 25px;
 }
