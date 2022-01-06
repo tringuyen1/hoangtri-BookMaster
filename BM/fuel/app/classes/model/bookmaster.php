@@ -55,6 +55,7 @@ class Model_Bookmaster extends Orm\Model {
         return mysqli_affected_rows($conn);
     }
     
+    
 
     public static function escape_string($str) {
         $conn = mysqli_connect('localhost', 'root', '', 'mt_book');

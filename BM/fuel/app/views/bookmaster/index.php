@@ -9,7 +9,7 @@
                 <div class = "issetAlert"></div>
                     <div class="alert hide" style="border-left: 8px solid #00FF7F;">
                         <span class="fas fas fa-check-circle" style="color: #00FF7F;"></span>
-                        <span class="msg">Success: <?php if(isset($bookIdSearch)) echo $bookIdSearch['id']?> <?php echo $mess?></span>
+                        <span class="msg">Success: <?php if(isset($id)) echo $id ?> <?php echo $mess?></span>
                         <div class="close-btn">
                             <span class="fas fa-times"></span>
                         </div>
@@ -19,7 +19,7 @@
                 <div class = "issetAlert"></div>
                     <div class="alert hide" style="border-left: 8px solid #FF0000;">
                         <span class="fas fa-exclamation-circle" style="color: #FF0000;"></span>
-                        <span class="msg">Error: <?php echo $messError?></span>
+                        <span class="msg">Error: <?php if(isset($id)) echo $id ?> <?php echo $messError?></span>
                         <div class="close-btn">
                             <span class="fas fa-times"></span>
                         </div>
@@ -35,7 +35,7 @@
             <div class="form-group">
                 <div class="searchId">
                 <?php  
-                    echo Form::input('bookId', isset($bookIdSearch) ? $bookIdSearch['id'] : (isset($book) ? $book->id : ''), array('placeholder' => 'Id','id'=>'bookId','onChange'=>'upperMe();'));      
+                    echo Form::input('bookId', isset($id) ? $id : (isset($book) ? $book->id : ''), array('placeholder' => 'Id','id'=>'bookId','onChange'=>'upperMe();'));      
                     echo Form::submit('btn-search', '検索', array(
                         'class' => 'btn-search','onclick'=>'document.pressed=this.value')); 
                  ?>
@@ -55,7 +55,7 @@
             ?>  
             <!-- --------------------------------- -->
            <?php
-                echo Form::input('bookId', isset($bookIdSearch) ? $bookIdSearch['id'] : (isset($book) ? $book->id : ''), array('type'=>'hidden'));
+                echo Form::input('bookId', isset($id) ? $id :  (isset($book) ? $book->id : ''), array('type'=>'hidden'));
            ?>
             <!-- -------------------------------------- -->
             <div class="form-group">
