@@ -1,5 +1,4 @@
 
-
 <div id="form-main-book">
         <div class="container">
             <div class="title-id">
@@ -10,7 +9,7 @@
                 <div class = "issetAlert"></div>
                     <div class="alert hide" style="border-left: 8px solid #00FF7F;">
                         <span class="fas fas fa-check-circle" style="color: #00FF7F;"></span>
-                        <span class="msg">Success: <?php echo $mess?></span>
+                        <span class="msg">Success: <?php if(isset($bookIdSearch)) echo $bookIdSearch['id']?> <?php echo $mess?></span>
                         <div class="close-btn">
                             <span class="fas fa-times"></span>
                         </div>
@@ -28,7 +27,7 @@
             <?php }?>
             <!--  -->
             <?php 
-            echo Form::open(array('action' => '', 'method' => 'post','id'=>'formBookSearch')); 
+            echo Form::open(array('action' => '', 'method' => 'post','id'=>'formBookSearch','onsubmit'=>'return onsubmitform();')); 
             ?>  
            <?php
                 echo Form::label('本ID：', 'bookId'); 
@@ -36,9 +35,9 @@
             <div class="form-group">
                 <div class="searchId">
                 <?php  
-                    echo Form::input('bookId', isset($bookIdSearch) ? $bookIdSearch[0]['id'] : (isset($book) ? $book->id : ''), array('placeholder' => 'Id','id'=>'bookId','onChange'=>'upperMe();'));      
+                    echo Form::input('bookId', isset($bookIdSearch) ? $bookIdSearch['id'] : (isset($book) ? $book->id : ''), array('placeholder' => 'Id','id'=>'bookId','onChange'=>'upperMe();'));      
                     echo Form::submit('btn-search', '検索', array(
-                        'class' => 'btn-search')); 
+                        'class' => 'btn-search','onclick'=>'document.pressed=this.value')); 
                  ?>
                 </div>
                 <span class="form-message"></span>
@@ -52,17 +51,17 @@
             <!-- ------------------------ -->
             <?php 
             
-            echo Form::open(array('action' => '', 'method' => 'post','id'=>'formBook')); 
+            echo Form::open(array('action' => '', 'method' => 'post','id'=>'formBook','onsubmit'=>'return onsubmitform();')); 
             ?>  
             <!-- --------------------------------- -->
            <?php
-                echo Form::input('bookId', isset($bookIdSearch) ? $bookIdSearch[0]['id'] : (isset($book) ? $book->id : ''), array('type'=>'hidden'));
+                echo Form::input('bookId', isset($bookIdSearch) ? $bookIdSearch['id'] : (isset($book) ? $book->id : ''), array('type'=>'hidden'));
            ?>
             <!-- -------------------------------------- -->
             <div class="form-group">
             <?php  
                 echo Form::label('本タイトル：', 'bookTitle');
-                echo Form::input('bookTitle', isset($bookIdSearch) ? $bookIdSearch[0]['book_title'] : (isset($book) ? $book->bookTitle : ''), array('placeholder' => 'Tiêu đề','id' => 'bookTitle'));      
+                echo Form::input('bookTitle', isset($bookIdSearch) ? $bookIdSearch['book_title'] : (isset($book) ? $book->bookTitle : ''), array('placeholder' => 'Tiêu đề','id' => 'bookTitle'));      
             ?>
                 <span class="form-message"></span>
             </div>
@@ -71,7 +70,7 @@
             <div class="form-group">
             <?php 
                 echo Form::label('著者名：', 'authorName');
-                echo Form::input('authorName', isset($bookIdSearch) ? $bookIdSearch[0]['author_name'] : (isset($book) ? $book->authorName : ''), array('placeholder' => 'Tên tác giả', 'id' => 'authorName'));     
+                echo Form::input('authorName', isset($bookIdSearch) ? $bookIdSearch['author_name'] : (isset($book) ? $book->authorName : ''), array('placeholder' => 'Tên tác giả', 'id' => 'authorName'));     
             ?>
                 <span class="form-message"></span>
             </div>
@@ -80,7 +79,7 @@
             <div class="form-group">
             <?php  
                 echo Form::label('出版社：', 'publisher');
-                echo Form::input('publisher', isset($bookIdSearch) ? $bookIdSearch[0]['publisher'] : (isset($book) ? $book->publisher : ''), array('placeholder' => 'Nhà xuất bản', 'id' => 'publisher'));          
+                echo Form::input('publisher', isset($bookIdSearch) ? $bookIdSearch['publisher'] : (isset($book) ? $book->publisher : ''), array('placeholder' => 'Nhà xuất bản', 'id' => 'publisher'));          
             ?>
                 <span class="form-message"></span>
             <div>
@@ -91,16 +90,16 @@
                 ?>
                 <div class="date">
                 <?php
-                    echo Form::input('year', isset($bookIdSearch) ? idate('Y',strtotime($bookIdSearch[0]['publication_day'])) : (isset($book) ? $year : ''), array('placeholder' => 'YY','id'=>'year'));
+                    echo Form::input('year', isset($bookIdSearch) ? idate('Y',strtotime($bookIdSearch['publication_day'])) : (isset($book) ? $year : ''), array('placeholder' => 'YY','id'=>'year'));
                     echo Form::label('年', 'year');
                 ?>
 
                 <?php
-                    echo Form::input('month', isset($bookIdSearch) ? idate('m',strtotime($bookIdSearch[0]['publication_day'])) : (isset($book) ? $month : ''), array('placeholder' => 'MM','id'=>'month')); 
+                    echo Form::input('month', isset($bookIdSearch) ? idate('m',strtotime($bookIdSearch['publication_day'])) : (isset($book) ? $month : ''), array('placeholder' => 'MM','id'=>'month')); 
                     echo Form::label('月', 'month');
                 ?>
                 <?php
-                    echo Form::input('day', isset($bookIdSearch) ? idate('d',strtotime($bookIdSearch[0]['publication_day'])) : (isset($book) ? $day : ''), array('placeholder' => 'DD','id'=>'day')); 
+                    echo Form::input('day', isset($bookIdSearch) ? idate('d',strtotime($bookIdSearch['publication_day'])) : (isset($book) ? $day : ''), array('placeholder' => 'DD','id'=>'day')); 
                     echo Form::label('日', 'day');
                 ?>
                 </div>
@@ -111,11 +110,11 @@
                 <div class="btn-form">
                     <?php
                         echo Form::submit('btn-add', '追加', array(
-                            'class' => 'btn-add'));  
+                            'class' => 'btn-add','onclick'=>'document.pressed=this.value'));  
                         echo Form::submit('btn-update', '更新', array(
-                            'class' => 'btn-update'));  
+                            'class' => 'btn-update','onclick'=>'document.pressed=this.value'));  
                         echo Form::submit('btn-delete', '削除', array(
-                            'class' => 'btn-delete'));  
+                            'class' => 'btn-delete','onclick'=>'document.pressed=this.value'));  
                     ?>
                     <input type="submit" name="btn-clear" class="btn-clear" value="クリア" <?php 
                             if(isset($bookIdSearch)){
@@ -134,6 +133,28 @@
     </div>
 
     <script>
+        function OnSubmitForm()
+        {
+            if(document.pressed == '追加')
+            {
+                document.myform.action ="<?php Controller_Bookmaster::addBook(); ?>";
+            }else
+            if(document.pressed == '検索')
+            {
+                document.myform.action ="<?php Controller_Bookmaster::searchId(); ?>";
+            }
+            else
+            if(document.pressed == '更新')
+            {
+                document.myform.action ="<?php Controller_Bookmaster::updateBook(); ?>";
+            }
+            else
+            if(document.pressed == '削除')
+            {
+                document.myform.action ="<?php Controller_Bookmaster::deleteBook(); ?>";
+            }
+            return true;
+        }
         if ($(".issetAlert")[0]){
             $('.alert').addClass("show");
             $('.alert').removeClass("hide");

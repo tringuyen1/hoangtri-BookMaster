@@ -60,12 +60,6 @@ class Model_Bookmaster extends Orm\Model {
         $conn = mysqli_connect('localhost', 'root', '', 'mt_book');
         return mysqli_real_escape_string($conn, $str);
     }
-    
-    // láy bản ghi theo id
-    public static function getDetailbook($id){
-        $getDetailbook = DB::select()->from('bookmasters')->where('id', '=', $id)->execute()->as_array();
-        return $getDetailbook;
-    }
 }
 
 
