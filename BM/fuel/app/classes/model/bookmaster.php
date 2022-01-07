@@ -6,8 +6,7 @@ class Model_Bookmaster extends Orm\Model {
         $result = mysqli_query($conn, $query_string);
         return $result;
     }
-
-    // cập nhật db
+    // thêm db
     public static function db_insert($data) {
         $conn = mysqli_connect('localhost', 'root', '', 'mt_book');
         $fields = "(" . implode(", ", array_keys($data)) . ")";
@@ -25,8 +24,6 @@ class Model_Bookmaster extends Orm\Model {
             ");
         return mysqli_insert_id($conn);
     }
-
-
     // update
     public static function db_update($data, $id) {
         $conn = mysqli_connect('localhost', 'root', '', 'mt_book');
@@ -45,8 +42,6 @@ class Model_Bookmaster extends Orm\Model {
        ");
         return mysqli_affected_rows($conn);
     }
-
-
     // delete
     public static function db_delete($id) {
         $conn = mysqli_connect('localhost', 'root', '', 'mt_book');
@@ -54,9 +49,6 @@ class Model_Bookmaster extends Orm\Model {
         Model_Bookmaster::db_query($query_string);
         return mysqli_affected_rows($conn);
     }
-    
-    
-
     public static function escape_string($str) {
         $conn = mysqli_connect('localhost', 'root', '', 'mt_book');
         return mysqli_real_escape_string($conn, $str);

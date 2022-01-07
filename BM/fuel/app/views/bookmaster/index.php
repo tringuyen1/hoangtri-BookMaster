@@ -105,7 +105,6 @@
                 </div>
                 <span class="form-message"></span>
             </div>
-           
             <div class="clearfix">
                 <div class="btn-form">
                     <?php
@@ -131,7 +130,6 @@
         ?>     
          </div>
     </div>
-
     <script>
         function OnSubmitForm()
         {
@@ -155,19 +153,6 @@
             }
             return true;
         }
-        if ($(".issetAlert")[0]){
-            $('.alert').addClass("show");
-            $('.alert').removeClass("hide");
-            $('.alert').addClass("showAlert");
-            setTimeout(function(){
-               $('.alert').removeClass("show");
-               $('.alert').addClass("hide");
-            },3000);
-         }
-         $('.close-btn').click(function(){
-           $('.alert').removeClass("show");
-           $('.alert').addClass("hide");
-         });
         Validator({      
             form: '#formBookSearch',
             formGroupSelector: '.form-group',
