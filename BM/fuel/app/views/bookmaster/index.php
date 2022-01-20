@@ -1,25 +1,30 @@
-
+<?php
+Controller_Bookmaster::addBook();
+Controller_Bookmaster::searchId();
+Controller_Bookmaster::updateBook();
+Controller_Bookmaster::deleteBook();
+?>
 <div id="form-main-book">
         <div class="container">
             <div class="title-id">
                 <h1>本マスタメンテ</h1>
                 <a href="bookmaster/thank">閉じる</a>
             </div>
-            <?php if(isset($mess)) { ?>
+            <?php if(Session::get_flash('mess')) { ?>
                 <div class = "issetAlert"></div>
                     <div class="alert hide" style="border-left: 8px solid #00FF7F;">
                         <span class="fas fas fa-check-circle" style="color: #00FF7F;"></span>
-                        <span class="msg">Success: <?php if(isset($id)) echo $id ?> <?php echo $mess?></span>
+                        <span class="msg">Success: <?php if(Session::get_flash('id')) echo Session::get_flash('id'); ?> <?php echo Session::get_flash('mess')?></span>
                         <div class="close-btn">
                             <span class="fas fa-times"></span>
                         </div>
                 </div>
             <?php }?>
-            <?php if(isset($messError)) { ?>
+            <?php if(Session::get_flash('messError')) { ?>
                 <div class = "issetAlert"></div>
                     <div class="alert hide" style="border-left: 8px solid #FF0000;">
                         <span class="fas fa-exclamation-circle" style="color: #FF0000;"></span>
-                        <span class="msg">Error: <?php if(isset($id)) echo $id ?> <?php echo $messError?></span>
+                        <span class="msg">Error: <?php if(Session::get_flash('id')) echo Session::get_flash('id'); ?> <?php echo Session::get_flash('messError');?></span>
                         <div class="close-btn">
                             <span class="fas fa-times"></span>
                         </div>
@@ -27,7 +32,7 @@
             <?php }?>
             <!--  -->
             <?php 
-            echo Form::open(array('action' => '', 'method' => 'post','id'=>'formBookSearch','onsubmit'=>'return onsubmitform();')); 
+            echo Form::open(array('action' => '/', 'method' => 'post','id'=>'formBookSearch','onsubmit'=>'return onsubmitform();')); 
             ?>  
            <?php
                 echo Form::label('本ID：', 'bookId'); 
@@ -35,6 +40,7 @@
             <div class="form-group">
                 <div class="searchId">
                 <?php  
+                    $id = Session::get_flash('id');
                     echo Form::input('bookId', isset($id) ? $id : (isset($book) ? $book->id : ''), array('placeholder' => 'Id','id'=>'bookId','onChange'=>'upperMe();'));      
                     echo Form::submit('btn-search', '検索', array(
                         'class' => 'btn-search','onclick'=>'document.pressed=this.value')); 
@@ -51,17 +57,19 @@
             <!-- ------------------------ -->
             <?php 
             
-            echo Form::open(array('action' => '', 'method' => 'post','id'=>'formBook','onsubmit'=>'return onsubmitform();')); 
+            echo Form::open(array('action' => '/', 'method' => 'post','id'=>'formBook','onsubmit'=>'return onsubmitform();')); 
             ?>  
             <!-- --------------------------------- -->
            <?php
+                $id = Session::get_flash('id');
                 echo Form::input('bookId', isset($id) ? $id :  (isset($book) ? $book->id : ''), array('type'=>'hidden'));
            ?>
             <!-- -------------------------------------- -->
             <div class="form-group">
-            <?php  
+            <?php
+                $book_title = Session::get_flash('book_title');
                 echo Form::label('本タイトル：', 'bookTitle');
-                echo Form::input('bookTitle', isset($bookIdSearch) ? $bookIdSearch['book_title'] : (isset($book) ? $book->bookTitle : ''), array('placeholder' => 'Tiêu đề','id' => 'bookTitle'));      
+                echo Form::input('bookTitle', isset($book_title) ? $book_title : (isset($book) ? $book->bookTitle : ''), array('placeholder' => 'Tiêu đề','id' => 'bookTitle'));      
             ?>
                 <span class="form-message"></span>
             </div>
@@ -69,8 +77,9 @@
             <!-- --------------------------- -->
             <div class="form-group">
             <?php 
+                $author_name = Session::get_flash('author_name');
                 echo Form::label('著者名：', 'authorName');
-                echo Form::input('authorName', isset($bookIdSearch) ? $bookIdSearch['author_name'] : (isset($book) ? $book->authorName : ''), array('placeholder' => 'Tên tác giả', 'id' => 'authorName'));     
+                echo Form::input('authorName', isset($author_name) ? $author_name : (isset($book) ? $book->authorName : ''), array('placeholder' => 'Tên tác giả', 'id' => 'authorName'));     
             ?>
                 <span class="form-message"></span>
             </div>
@@ -78,28 +87,33 @@
              <!-- --------------------------- -->
             <div class="form-group">
             <?php  
+                $publisher = Session::get_flash('publisher');
                 echo Form::label('出版社：', 'publisher');
-                echo Form::input('publisher', isset($bookIdSearch) ? $bookIdSearch['publisher'] : (isset($book) ? $book->publisher : ''), array('placeholder' => 'Nhà xuất bản', 'id' => 'publisher'));          
+                echo Form::input('publisher', isset($publisher) ? $publisher : (isset($book) ? $book->publisher : ''), array('placeholder' => 'Nhà xuất bản', 'id' => 'publisher'));          
             ?>
                 <span class="form-message"></span>
             <div>
             <!-- ------------------------------ -->
             <div class="form-group">
-                <?php 
+                <?php
+                    $publication_day = Session::get_flash('publication_day'); 
+                ?>
+                <?php
+                    
                     echo Form::label('出版年月日：', 'publicationDay');
                 ?>
                 <div class="date">
                 <?php
-                    echo Form::input('year', isset($bookIdSearch) ? idate('Y',strtotime($bookIdSearch['publication_day'])) : (isset($book) ? $year : ''), array('placeholder' => 'YY','id'=>'year'));
+                    echo Form::input('year', isset($publication_day) ? idate('Y',strtotime($publication_day)) : (isset($book) ? $year : ''), array('placeholder' => 'YY','id'=>'year'));
                     echo Form::label('年', 'year');
                 ?>
 
                 <?php
-                    echo Form::input('month', isset($bookIdSearch) ? idate('m',strtotime($bookIdSearch['publication_day'])) : (isset($book) ? $month : ''), array('placeholder' => 'MM','id'=>'month')); 
+                    echo Form::input('month', isset($publication_day) ? idate('m',strtotime($publication_day)) : (isset($book) ? $month : ''), array('placeholder' => 'MM','id'=>'month')); 
                     echo Form::label('月', 'month');
                 ?>
                 <?php
-                    echo Form::input('day', isset($bookIdSearch) ? idate('d',strtotime($bookIdSearch['publication_day'])) : (isset($book) ? $day : ''), array('placeholder' => 'DD','id'=>'day')); 
+                    echo Form::input('day', isset($publication_day) ? idate('d',strtotime($publication_day)) : (isset($book) ? $day : ''), array('placeholder' => 'DD','id'=>'day')); 
                     echo Form::label('日', 'day');
                 ?>
                 </div>
@@ -116,7 +130,7 @@
                             'class' => 'btn-delete','onclick'=>'document.pressed=this.value'));  
                     ?>
                     <input type="submit" name="btn-clear" class="btn-clear" value="クリア" <?php 
-                            if(isset($bookIdSearch)){
+                            if(Session::get_flash('id') || Session::get_flash('book_title') || Session::get_flash('author_name') || Session::get_flash('publisher')){
                                 echo "onclick = ''";
                             }else {
                                 echo "onclick = 'return false;'";
@@ -135,7 +149,7 @@
         {
             if(document.pressed == '追加')
             {
-                document.myform.action ="<?php Controller_Bookmaster::addBook(); ?>";
+                return document.myform.action ="<?php Controller_Bookmaster::addBook(); ?>";
             }else
             if(document.pressed == '検索')
             {

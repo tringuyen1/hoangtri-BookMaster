@@ -19,55 +19,12 @@ class Controller_Bookmaster extends Controller_Template
         'MSG0015'=> " đã xóa Book",
         'MSG0016'=> "Ngày xuất bản không hợp lệ",
     );
+
 	public function action_index()
 	{  
         $data = array();
-        // - thêm: truyền dữ liệu qua view
-        $add = Controller_Bookmaster::addBook();
-        if(is_array($add)){
-            if(count($add) == 3){
-                $data = array('mess' => $add[0],'bookIdSearch' => $add[1],'id' => $add[2]);
-            }elseif(count($add) == 2){
-                $data = array('messError'=> $add[0],'id' => $add[1]);
-            }elseif(count($add) == 1){
-                $data = array('messError'=> $add[0]);
-            } 
-        }
-        // - search: truyền dữ liệu qua view
-        $searchId = Controller_Bookmaster::searchId();
-        if(is_array($searchId)){
-            if(count($searchId) == 3){
-                $data = array('mess' => $searchId[0],'bookIdSearch' => $searchId[1],'id' => $searchId[2]);
-            }elseif(count($searchId) == 2){
-                $data = array('messError'=> $searchId[0],'id' => $searchId[1]);
-            }elseif(count($searchId) == 1){
-                $data = array('messError'=> $searchId[0]);
-            }
-        }
-        // - update: truyền dữ liệu qua view
-        $updateBook = Controller_Bookmaster::updateBook();
-        if(is_array($updateBook)){
-            if(count($updateBook) == 3){
-                $data = array('mess' => $updateBook[0],'bookIdSearch' => $updateBook[1],'id' => $updateBook[2]);
-            }elseif(count($updateBook) == 2){
-                $data = array('messError'=> $updateBook[0],'id' => $updateBook[1]);
-            }elseif(count($updateBook) == 1){
-                $data = array('messError'=> $updateBook[0]);
-            }
-        }
-        // - xóa: truyền dữ liệu qua view
-        $deleteBook = Controller_Bookmaster::deleteBook();
-        if(is_array($deleteBook)){
-            if(count($deleteBook) == 3){
-                $data = array('mess' => $deleteBook[0],'id' =>$deleteBook[2]);
-            }elseif(count($deleteBook) == 2){
-                $data = array('messError'=> $deleteBook[0],'id' =>$deleteBook[1]);
-            }elseif(count($deleteBook) == 1){
-                $data = array('messError'=> $deleteBook[0]);
-            }
-        }
         $this->template->title = 'Book master';
-        $this->template->content = View::forge('bookmaster/index', $data);
+        $this->template->content = View::forge('bookmaster/index', $data,false);
 	}
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
     // - controller chỉ có nhiệm vụ lấy thông tin người dùng 
@@ -103,15 +60,21 @@ class Controller_Bookmaster extends Controller_Template
                     Model_Bookmaster::db_insert($dataBook);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0012'];
-                    // - trả về mảng: thông báo , thông tin người dùng và id
-                    return array($mess,$dataBook,$id);
+
+                    Session::set_flash('id', $id);
+                    Session::set_flash('mess', $mess);
+                    Session::set_flash('book_title', $book_title);
+                    Session::set_flash('author_name', $author_name);
+                    Session::set_flash('publisher', $publisher);
+                    Session::set_flash('publication_day', $publication_day);
                 }else{
                     // - lấy id người dùng nhập
                     $id = input::post('bookId');
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0011'];
-                    // - trả về mảng: thông báo và id
-                    return array($mess,$id);
+                    
+                    Session::set_flash('id', $id);
+                    Session::set_flash('messError', $mess);
                 }
                 // - - --  - -  - - - -  - - - - - -  - - --  
             }
@@ -120,7 +83,7 @@ class Controller_Bookmaster extends Controller_Template
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
             // - trả về mảng: thông báo
-            return array($mess);
+            Session::set_flash('messError', $mess);
         }
     }
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
@@ -134,7 +97,8 @@ class Controller_Bookmaster extends Controller_Template
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG004'];
                     // - trả về mảng
-                    return array($mess,$id);
+                    Session::set_flash('id', $id);
+                    Session::set_flash('messError', $mess);
                 }else{
                     // - lấy id người dùng nhập
                     $id = input::post('bookId');
@@ -143,7 +107,12 @@ class Controller_Bookmaster extends Controller_Template
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG003'];
                     // - trả về mảng: thông báo, lấy 1 mảng theo id và id 
-                    return array($mess,$bookIdSearch,$id);
+                    Session::set_flash('id', $bookIdSearch['id']);
+                    Session::set_flash('mess', $mess);
+                    Session::set_flash('book_title', $bookIdSearch['book_title']);
+                    Session::set_flash('author_name', $bookIdSearch['author_name']);
+                    Session::set_flash('publisher', $bookIdSearch['publisher']);
+                    Session::set_flash('publication_day', $bookIdSearch['publication_day']);
                 }
             }
         }catch (Exception $e)
@@ -151,7 +120,7 @@ class Controller_Bookmaster extends Controller_Template
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
             // - trả về mảng: thông báo
-            return array($mess);
+            Session::set_flash('messError', $mess);
         }
     }
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
@@ -165,7 +134,8 @@ class Controller_Bookmaster extends Controller_Template
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0014'];
                     // - trả về mảng: thông báo và id
-                    return array($mess,$id);
+                    Session::set_flash('id', $id);
+                    Session::set_flash('messError', $mess);
                 }else {
                     // - lấy cập nhật từ người dùng nhập vào
                     $id = input::post('bookId');
@@ -190,7 +160,12 @@ class Controller_Bookmaster extends Controller_Template
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0013'];
                     // - trả về mảng: thông báo, thông tin người dùng và id
-                    return array($mess,$dataBook,$id);
+                    Session::set_flash('id', $id);
+                    Session::set_flash('mess', $mess);
+                    Session::set_flash('book_title', $book_title);
+                    Session::set_flash('author_name', $author_name);
+                    Session::set_flash('publisher', $publisher);
+                    Session::set_flash('publication_day', $publication_day);
                 }
             }
         }catch (Exception $e)
@@ -198,7 +173,7 @@ class Controller_Bookmaster extends Controller_Template
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
             // - trả về mảng: thông báo
-            return array($mess);
+            Session::set_flash('messError', $mess);
         }
         
     }
@@ -213,7 +188,8 @@ class Controller_Bookmaster extends Controller_Template
                     // - thông báo 
                     $mess = Controller_Bookmaster::$messAge['MSG0014'];
                     // - trả về mảng
-                    return array($mess,$id);
+                    Session::set_flash('id', $id);
+                    Session::set_flash('messError', $mess);
                 }else{
                     // - lấy id cần xóa
                     $id = input::post('bookId');
@@ -222,7 +198,8 @@ class Controller_Bookmaster extends Controller_Template
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0015'];
                     // - trả về mảng: thông báo , mảng rỗng và id
-                    return array($mess,'',$id);
+                    Session::set_flash('id', $id);
+                    Session::set_flash('mess', $mess);
                 }
             }
         }catch (Exception $e)
@@ -230,7 +207,7 @@ class Controller_Bookmaster extends Controller_Template
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
             // - trả về mảng: thông báo
-            return array($mess);
+            Session::set_flash('messError', $mess);
         }
     }
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
