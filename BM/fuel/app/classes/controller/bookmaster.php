@@ -61,6 +61,7 @@ class Controller_Bookmaster extends Controller_Template
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0012'];
 
+                    // - lưu vào session: thông tin sách 
                     Session::set_flash('id', $id);
                     Session::set_flash('mess', $mess);
                     Session::set_flash('book_title', $book_title);
@@ -73,6 +74,7 @@ class Controller_Bookmaster extends Controller_Template
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0011'];
                     
+                    // - Lưu vào session: id và thông báo
                     Session::set_flash('id', $id);
                     Session::set_flash('messError', $mess);
                 }
@@ -82,7 +84,7 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
-            // - trả về mảng: thông báo
+            // - Lưu vào session: thông báo
             Session::set_flash('messError', $mess);
         }
     }
@@ -106,7 +108,7 @@ class Controller_Bookmaster extends Controller_Template
                     $bookIdSearch = Model_Bookmaster::find($id);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG003'];
-                    // - trả về mảng: thông báo, lấy 1 mảng theo id và id 
+                    // - Lưu vào session: thông báo, thông tin sách
                     Session::set_flash('id', $bookIdSearch['id']);
                     Session::set_flash('mess', $mess);
                     Session::set_flash('book_title', $bookIdSearch['book_title']);
@@ -119,7 +121,7 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
-            // - trả về mảng: thông báo
+            // - Lưu vào session: thông báo
             Session::set_flash('messError', $mess);
         }
     }
@@ -133,7 +135,7 @@ class Controller_Bookmaster extends Controller_Template
                     $id = input::post('bookId');     
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0014'];
-                    // - trả về mảng: thông báo và id
+                    // - Lưu vào session: thông báo và id
                     Session::set_flash('id', $id);
                     Session::set_flash('messError', $mess);
                 }else {
@@ -159,7 +161,7 @@ class Controller_Bookmaster extends Controller_Template
                     Model_Bookmaster::db_update($dataBook,$id);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0013'];
-                    // - trả về mảng: thông báo, thông tin người dùng và id
+                    // - Lưu vào session: thông báo, thông tin sách và id
                     Session::set_flash('id', $id);
                     Session::set_flash('mess', $mess);
                     Session::set_flash('book_title', $book_title);
@@ -172,7 +174,7 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
-            // - trả về mảng: thông báo
+            // - Lưu vào session: thông báo
             Session::set_flash('messError', $mess);
         }
         
@@ -187,7 +189,7 @@ class Controller_Bookmaster extends Controller_Template
                     $id = input::post('bookId');
                     // - thông báo 
                     $mess = Controller_Bookmaster::$messAge['MSG0014'];
-                    // - trả về mảng
+                    // - Lưu vào session: id và thông báo
                     Session::set_flash('id', $id);
                     Session::set_flash('messError', $mess);
                 }else{
@@ -197,7 +199,7 @@ class Controller_Bookmaster extends Controller_Template
                     Model_Bookmaster::db_delete($id);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0015'];
-                    // - trả về mảng: thông báo , mảng rỗng và id
+                    // - Lưu vào session: thông báo và id
                     Session::set_flash('id', $id);
                     Session::set_flash('mess', $mess);
                 }
@@ -206,7 +208,7 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
-            // - trả về mảng: thông báo
+            // - Lưu vào session: thông báo
             Session::set_flash('messError', $mess);
         }
     }

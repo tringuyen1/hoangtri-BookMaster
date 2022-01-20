@@ -130,7 +130,7 @@ Controller_Bookmaster::deleteBook();
                             'class' => 'btn-delete','onclick'=>'document.pressed=this.value'));  
                     ?>
                     <input type="submit" name="btn-clear" class="btn-clear" value="クリア" <?php 
-                            if(Session::get_flash('id') || Session::get_flash('book_title') || Session::get_flash('author_name') || Session::get_flash('publisher')){
+                            if(Session::get_flash('id') || Session::get_flash('book_title') || Session::get_flash('author_name') || Session::get_flash('publisher') || Session::get_flash('publication_day')){
                                 echo "onclick = ''";
                             }else {
                                 echo "onclick = 'return false;'";
