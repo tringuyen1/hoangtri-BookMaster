@@ -19,7 +19,11 @@ return array(
 	 */
 
 	'_root_' => 'bookmaster/index',
-
+	'add' => 'bookmaster/add',
+	'update' => 'bookmaster/update',
+	'delete' => 'bookmaster/delete',
+	'search' => 'bookmaster/search',
+	
 	/**
 	 * -------------------------------------------------------------------------
 	 *  Page not found

@@ -26,13 +26,15 @@ class Controller_Bookmaster extends Controller_Template
         $this->template->title = 'Book master';
         $this->template->content = View::forge('bookmaster/index', $data,false);
 	}
+
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
     // - controller chỉ có nhiệm vụ lấy thông tin người dùng 
     // - các chức năng thêm, sửa, xóa, tìm kiếm đều được xử lí từ model
     // - các function được gọi từ form và dùng js để thay đổi action   
     // - các hàm được tách riêng biệt
     // - fucntion: thêm
-    public static function addBook(){
+    public function action_add(){
+        $data = array();
         try
         {
             if(input::post('btn-add')){        
@@ -61,22 +63,23 @@ class Controller_Bookmaster extends Controller_Template
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0012'];
 
-                    // - lưu vào session: thông tin sách 
-                    Session::set_flash('id', $id);
-                    Session::set_flash('mess', $mess);
-                    Session::set_flash('book_title', $book_title);
-                    Session::set_flash('author_name', $author_name);
-                    Session::set_flash('publisher', $publisher);
-                    Session::set_flash('publication_day', $publication_day);
+                    $data = array(
+                        'id' => $id,
+                        'mess' => $mess,
+                        'bookDetail' => $dataBook
+                    );
+
+                    // $this->template->content = View::forge('bookmaster/index',$data);
+                    
                 }else{
                     // - lấy id người dùng nhập
                     $id = input::post('bookId');
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0011'];
-                    
-                    // - Lưu vào session: id và thông báo
-                    Session::set_flash('id', $id);
-                    Session::set_flash('messError', $mess);
+                    $data = array(
+                        'id' => $id,
+                        'messError' => $mess,
+                    );
                 }
                 // - - --  - -  - - - -  - - - - - -  - - --  
             }
@@ -84,13 +87,18 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
-            // - Lưu vào session: thông báo
-            Session::set_flash('messError', $mess);
+            $data = array(
+                'messError' => $mess,
+            );
         }
+
+        $this->template->title = 'book master';
+        $this->template->content = View::forge('bookmaster/index',$data);
     }
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
     // - function: tìm kiếm
-    public static function searchId(){
+    public function action_search(){
+        $data = array();
         try{
             if(input::post('btn-search')){
                 if(Model_Bookmaster::find(input::post('bookId')) === null){
@@ -98,9 +106,10 @@ class Controller_Bookmaster extends Controller_Template
                     $id = input::post('bookId');
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG004'];
-                    // - trả về mảng
-                    Session::set_flash('id', $id);
-                    Session::set_flash('messError', $mess);
+                    $data = array(
+                        'id' => $id,
+                        'messError' => $mess,
+                    );
                 }else{
                     // - lấy id người dùng nhập
                     $id = input::post('bookId');
@@ -108,26 +117,29 @@ class Controller_Bookmaster extends Controller_Template
                     $bookIdSearch = Model_Bookmaster::find($id);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG003'];
-                    // - Lưu vào session: thông báo, thông tin sách
-                    Session::set_flash('id', $bookIdSearch['id']);
-                    Session::set_flash('mess', $mess);
-                    Session::set_flash('book_title', $bookIdSearch['book_title']);
-                    Session::set_flash('author_name', $bookIdSearch['author_name']);
-                    Session::set_flash('publisher', $bookIdSearch['publisher']);
-                    Session::set_flash('publication_day', $bookIdSearch['publication_day']);
+                    $data = array(
+                        'id' => $id,
+                        'mess' => $mess,
+                        'bookDetail' => $bookIdSearch
+                    );
                 }
             }
         }catch (Exception $e)
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
-            // - Lưu vào session: thông báo
-            Session::set_flash('messError', $mess);
+            $data = array(
+                'messError' => $mess,
+            );
+           
         }
+        $this->template->title = 'book master';
+        $this->template->content = View::forge('bookmaster/index',$data);
     }
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
     // - function: udpate
-    public static function updateBook(){
+    public function action_update(){
+        $data = array();
         try{
             if(input::post('btn-update')){
                 if(Model_Bookmaster::find(input::post('bookId')) === null){   
@@ -135,9 +147,10 @@ class Controller_Bookmaster extends Controller_Template
                     $id = input::post('bookId');     
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0014'];
-                    // - Lưu vào session: thông báo và id
-                    Session::set_flash('id', $id);
-                    Session::set_flash('messError', $mess);
+                    $data = array(
+                        'id' => $id,
+                        'messError' => $mess
+                    );
                 }else {
                     // - lấy cập nhật từ người dùng nhập vào
                     $id = input::post('bookId');
@@ -161,27 +174,28 @@ class Controller_Bookmaster extends Controller_Template
                     Model_Bookmaster::db_update($dataBook,$id);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0013'];
-                    // - Lưu vào session: thông báo, thông tin sách và id
-                    Session::set_flash('id', $id);
-                    Session::set_flash('mess', $mess);
-                    Session::set_flash('book_title', $book_title);
-                    Session::set_flash('author_name', $author_name);
-                    Session::set_flash('publisher', $publisher);
-                    Session::set_flash('publication_day', $publication_day);
+                    $data = array(
+                        'id' => $id,
+                        'bookDetail' => $dataBook,
+                        'mess' => $mess
+                    );
                 }
             }
         }catch (Exception $e)
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
-            // - Lưu vào session: thông báo
-            Session::set_flash('messError', $mess);
+            $data = array(
+                'messError' => $mess,
+            );
         }
-        
+        $this->template->title = 'book master';
+        $this->template->content = View::forge('bookmaster/index',$data);  
     }
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
     // - function: xóa
-    public static function deleteBook(){
+    public function action_delete(){
+        $data = array();
         try{
             if(input::post('btn-delete')){
                 if(Model_Bookmaster::find(input::post('bookId')) === null){
@@ -189,9 +203,11 @@ class Controller_Bookmaster extends Controller_Template
                     $id = input::post('bookId');
                     // - thông báo 
                     $mess = Controller_Bookmaster::$messAge['MSG0014'];
-                    // - Lưu vào session: id và thông báo
-                    Session::set_flash('id', $id);
-                    Session::set_flash('messError', $mess);
+
+                    $data = array(
+                        'id' => $id,
+                        'messError' => $mess
+                    );
                 }else{
                     // - lấy id cần xóa
                     $id = input::post('bookId');
@@ -199,18 +215,23 @@ class Controller_Bookmaster extends Controller_Template
                     Model_Bookmaster::db_delete($id);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0015'];
-                    // - Lưu vào session: thông báo và id
-                    Session::set_flash('id', $id);
-                    Session::set_flash('mess', $mess);
+
+                    $data = array(
+                        'id'=> $id,
+                        'mess' => $mess
+                    );
                 }
             }
         }catch (Exception $e)
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
-            // - Lưu vào session: thông báo
-            Session::set_flash('messError', $mess);
+            $data = array(
+                'messError' => $mess
+            );
         }
+        $this->template->title = 'book master';
+        $this->template->content = View::forge('bookmaster/index',$data);
     }
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
     public function action_thank(){

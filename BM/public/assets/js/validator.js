@@ -80,6 +80,15 @@ function Validator(options) {
       });
 
       if (isFormValid) {
+        if (document.pressed == "追加") {
+          document.myForm.action = "add";
+        } else if (document.pressed == "更新") {
+          document.myForm.action = "update";
+        } else if (document.pressed == "検索") {
+          document.myFormSearch.action = "search";
+        } else if (document.pressed == "削除") {
+          document.myForm.action = "delete";
+        }
         formElement.submit();
       } else {
         e.preventDefault();
