@@ -51,7 +51,7 @@
             <!-- ------------------------ -->
             <?php 
             
-            echo Form::open(array('action'=> '','method' => 'post','name'=>'myForm','id'=>'formBook','onsubmit'=>"return onsubmitform();")); 
+            echo Form::open(array('action'=> '','method' => 'post','name'=>'myForm','id'=>'formBook')); 
             ?>  
             <!-- --------------------------------- -->
            <?php
@@ -91,16 +91,22 @@
                 ?>
                 <div class="date">
                 <?php
-                    echo Form::input('year', isset($bookDetail) ? idate('Y',strtotime($bookDetail['publication_day'])) : (isset($book) ? $year : ''), array('placeholder' => 'YY','id'=>'year'));
+                    echo Form::input('year', 
+                        isset($bookDetail) ? idate('Y',strtotime($bookDetail['publication_day'])) : (isset($book) ? $year : ''), 
+                        array('placeholder' => 'YY','id'=>'year'));
                     echo Form::label('年', 'year');
                 ?>
 
                 <?php
-                    echo Form::input('month', isset($bookDetail) ? idate('m',strtotime($bookDetail['publication_day'])) : (isset($book) ? $month : ''), array('placeholder' => 'MM','id'=>'month')); 
+                    echo Form::input('month', 
+                        isset($bookDetail) ? idate('m',strtotime($bookDetail['publication_day'])) : (isset($book) ? $month : ''), 
+                        array('placeholder' => 'MM','id'=>'month')); 
                     echo Form::label('月', 'month');
                 ?>
                 <?php
-                    echo Form::input('day', isset($bookDetail) ? idate('d',strtotime($bookDetail['publication_day'])) : (isset($book) ? $day : ''), array('placeholder' => 'DD','id'=>'day')); 
+                    echo Form::input('day', 
+                        isset($bookDetail) ? idate('d',strtotime($bookDetail['publication_day'])) : (isset($book) ? $day : ''), 
+                        array('placeholder' => 'DD','id'=>'day')); 
                     echo Form::label('日', 'day');
                 ?>
                 </div>

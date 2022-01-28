@@ -23,6 +23,7 @@ class Controller_Bookmaster extends Controller_Template
 	public function action_index()
 	{  
         $data = array();
+        // - trả về view
         $this->template->title = 'Book master';
         $this->template->content = View::forge('bookmaster/index', $data,false);
 	}
@@ -61,7 +62,7 @@ class Controller_Bookmaster extends Controller_Template
                     Model_Bookmaster::db_insert($dataBook);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0012'];
-
+                    // - lưu vào mảng data
                     $data = array(
                         'id' => $id,
                         'mess' => $mess,
@@ -75,6 +76,7 @@ class Controller_Bookmaster extends Controller_Template
                     $id = input::post('bookId');
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0011'];
+                    // - lưu vào mảng data
                     $data = array(
                         'id' => $id,
                         'messError' => $mess,
@@ -86,11 +88,13 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
+            // - lưu vào data
             $data = array(
                 'messError' => $mess,
             );
         }
 
+        // - trả về view và data
         $this->template->title = 'book master';
         $this->template->content = View::forge('bookmaster/index',$data);
     }
@@ -105,6 +109,7 @@ class Controller_Bookmaster extends Controller_Template
                     $id = input::post('bookId');
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG004'];
+                    // - lưa vào mảng data
                     $data = array(
                         'id' => $id,
                         'messError' => $mess,
@@ -116,6 +121,7 @@ class Controller_Bookmaster extends Controller_Template
                     $bookIdSearch = Model_Bookmaster::find($id);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG003'];
+                    // - lưu vào mảng data
                     $data = array(
                         'id' => $id,
                         'mess' => $mess,
@@ -127,11 +133,14 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
+            // - lưu vào mảng data
             $data = array(
                 'messError' => $mess,
             );
            
         }
+
+        // - trả về view và data
         $this->template->title = 'book master';
         $this->template->content = View::forge('bookmaster/index',$data);
     }
@@ -146,6 +155,7 @@ class Controller_Bookmaster extends Controller_Template
                     $id = input::post('bookId');     
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0014'];
+                    // - lưu vào mảng data: id và thông báo
                     $data = array(
                         'id' => $id,
                         'messError' => $mess
@@ -173,6 +183,7 @@ class Controller_Bookmaster extends Controller_Template
                     Model_Bookmaster::db_update($dataBook,$id);
                     // - thông báo
                     $mess = Controller_Bookmaster::$messAge['MSG0013'];
+                    // - lưu vào mảng data
                     $data = array(
                         'id' => $id,
                         'bookDetail' => $dataBook,
@@ -184,10 +195,13 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
+            // - lưu vào mảng data
             $data = array(
                 'messError' => $mess,
             );
         }
+
+        // - trả về view và data
         $this->template->title = 'book master';
         $this->template->content = View::forge('bookmaster/index',$data);  
     }
@@ -200,9 +214,9 @@ class Controller_Bookmaster extends Controller_Template
                 if(Model_Bookmaster::find(input::post('bookId')) === null){
                     // - lấy id người dùng nhập
                     $id = input::post('bookId');
-                    // - thông báo 
+                    // - thông báo lỗi 
                     $mess = Controller_Bookmaster::$messAge['MSG0014'];
-
+                    // - lưu vào mảng data
                     $data = array(
                         'id' => $id,
                         'messError' => $mess
@@ -212,9 +226,9 @@ class Controller_Bookmaster extends Controller_Template
                     $id = input::post('bookId');
                     // - hàm xóa từ model
                     Model_Bookmaster::db_delete($id);
-                    // - thông báo
+                    // - thông báo success
                     $mess = Controller_Bookmaster::$messAge['MSG0015'];
-
+                    // - lưu vào mảng data
                     $data = array(
                         'id'=> $id,
                         'mess' => $mess
@@ -225,10 +239,13 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
+            // - lưu vào mảng data
             $data = array(
                 'messError' => $mess
             );
         }
+
+        // - trả về view và data
         $this->template->title = 'book master';
         $this->template->content = View::forge('bookmaster/index',$data);
     }
