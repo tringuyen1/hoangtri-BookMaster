@@ -117,7 +117,7 @@
                             'class' => 'btn-delete','onclick'=>"document.pressed=this.value"));  
                     ?>
                     <input type="submit" name="btn-clear" class="btn-clear" value="クリア" <?php 
-                            if(isset($id) || isset($bookDetail)){
+                            if(isset($bookDetail)){
                                 echo "onclick = ''";
                             }else {
                                 echo "onclick = 'return false;'";

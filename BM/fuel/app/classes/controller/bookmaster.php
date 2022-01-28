@@ -26,7 +26,6 @@ class Controller_Bookmaster extends Controller_Template
         $this->template->title = 'Book master';
         $this->template->content = View::forge('bookmaster/index', $data,false);
 	}
-
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
     // - controller chỉ có nhiệm vụ lấy thông tin người dùng 
     // - các chức năng thêm, sửa, xóa, tìm kiếm đều được xử lí từ model
