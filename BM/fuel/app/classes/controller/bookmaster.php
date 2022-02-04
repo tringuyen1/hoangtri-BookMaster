@@ -68,9 +68,7 @@ class Controller_Bookmaster extends Controller_Template
                         'mess' => $mess,
                         'bookDetail' => $dataBook
                     );
-
                     // $this->template->content = View::forge('bookmaster/index',$data);
-                    
                 }else{
                     // - lấy id người dùng nhập
                     $id = input::post('bookId');
@@ -88,12 +86,11 @@ class Controller_Bookmaster extends Controller_Template
         {
             // - thông báo trường hợp ngoại lệ liên quan đến DB error
             $mess = Controller_Bookmaster::$messAge['MSG005'];
-            // - lưu vào data
+            // - lưu vào mảng data
             $data = array(
                 'messError' => $mess,
             );
         }
-
         // - trả về view và data
         $this->template->title = 'book master';
         $this->template->content = View::forge('bookmaster/index',$data);
@@ -139,7 +136,6 @@ class Controller_Bookmaster extends Controller_Template
             );
            
         }
-
         // - trả về view và data
         $this->template->title = 'book master';
         $this->template->content = View::forge('bookmaster/index',$data);
@@ -200,7 +196,6 @@ class Controller_Bookmaster extends Controller_Template
                 'messError' => $mess,
             );
         }
-
         // - trả về view và data
         $this->template->title = 'book master';
         $this->template->content = View::forge('bookmaster/index',$data);  
@@ -244,12 +239,12 @@ class Controller_Bookmaster extends Controller_Template
                 'messError' => $mess
             );
         }
-
         // - trả về view và data
         $this->template->title = 'book master';
         $this->template->content = View::forge('bookmaster/index',$data);
     }
     //- - - - - - - - - -  - - - - - - -  - - - - - - - - 
+    // - xử lí chức năng close
     public function action_thank(){
         $data = array();
         $this->template->title = 'Thanks';

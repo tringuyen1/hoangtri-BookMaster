@@ -80,6 +80,7 @@ function Validator(options) {
       });
 
       if (isFormValid) {
+        // change action
         if (document.pressed == "追加") {
           document.myForm.action = "add";
         } else if (document.pressed == "更新") {
